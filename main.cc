@@ -75,7 +75,7 @@ void sig_handler(int signo) { wait_group.done(); }
 
 int main() {
   WFHttpServer server(process);
-  if (server.start(80) == 0) {
+  if (server.start(8080) == 0) {
     wait_group.wait();
     server.stop();
   } else {
