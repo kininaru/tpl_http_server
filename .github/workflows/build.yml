@@ -16,7 +16,7 @@ jobs:
     
     - name: Install dependences
       run: |
-        apt install libssl-dev
+        sudo apt install libssl-dev
         git clone https://github.com/sogou/workflow
         cd workflow
         make
