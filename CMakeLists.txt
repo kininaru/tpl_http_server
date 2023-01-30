@@ -39,5 +39,5 @@ else ()
 	set(WORKFLOW_LIB workflow pthread OpenSSL::SSL OpenSSL::Crypto ${LIBRT})
 endif ()
 
-add_executable(ctest main.cc)
-target_link_libraries(ctest ${WORKFLOW_LIB})
+add_executable(ctest.o main.cc)
+target_link_libraries(ctest.o ${WORKFLOW_LIB})
