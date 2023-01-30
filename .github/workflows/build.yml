@@ -19,16 +19,16 @@ jobs:
         sudo apt install libssl-dev
         git clone https://github.com/sogou/workflow
         cd workflow
-        make
-        make install
+        sudo make
+        sudo make install
         cd ..
 
     - name: Build Ubuntu Linux amd64
       run: |
         mkdir build
         cd build
-        cmake ..
-        make
+        sudo cmake ..
+        sudo make
         cd ..
 
     - name: Release
