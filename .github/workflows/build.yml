@@ -29,6 +29,7 @@ jobs:
         cd build
         cmake ..
         make
+        cd ..
 
     - name: Release
       uses: softprops/action-gh-release@v1
