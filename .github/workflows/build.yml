@@ -1,0 +1,41 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Build for Linux
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependences
+      run: |
+        apt install libssl-dev
+        git clone https://github.com/sogou/workflow
+        cd workflow
+        make
+        make install
+        cd ..
+
+    - name: Build Ubuntu Linux amd64
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v0.1
+        release_name: v0.1
+        files: |
+          build/ctest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
