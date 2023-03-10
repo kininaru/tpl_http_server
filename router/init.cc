@@ -12,7 +12,7 @@
 std::map<std::string, std::function<void (REQUEST *, RESPONSE *)>> router;
 
 void InitRouter() {
-    router["/"] = ControllerIndex;
+    router["/"] = controller_index;
 }
 
 void Entrance(WFHttpTask *server_task) {
@@ -20,7 +20,7 @@ void Entrance(WFHttpTask *server_task) {
     RESPONSE *res = server_task->get_resp();
     const char *path = req->get_request_uri();
 
-    std::function<void (REQUEST *, RESPONSE *)> controller = ControllerNotFound;
+    std::function<void (REQUEST *, RESPONSE *)> controller = controller_not_found;
     if (router.count(path)) controller = router[path];
 
     controller(req, res);

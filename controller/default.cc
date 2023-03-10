@@ -10,20 +10,17 @@
 
 using json = nlohmann::json;
 
-void Response(RESPONSE *res, int code, std::string msg, json data) {
-    json body = {
-        {"code", code},
-        {"msg", msg},
-        {"data", data}
-    };
+void response(RESPONSE *res, int code, std::string msg, json *data) {
+    json body = { {"code", code}, {"msg", msg} };
+    if (data) body["data"] = *data;
     res->append_output_body(body.dump());
 }
 
-void ControllerIndex(REQUEST *req, RESPONSE *res) {
-    Response(res, 0, "here is index");
+void controller_index(REQUEST *req, RESPONSE *res) {
+    response(res, 0, "here is index", nullptr);
 }
 
-void ControllerNotFound(REQUEST *req, RESPONSE *res) {
+void controller_not_found(REQUEST *req, RESPONSE *res) {
     res->set_status_code("404");
-    Response(res, 404, "page not found");
+    response(res, 404, "page not found", nullptr);
 }
