@@ -10,10 +10,11 @@
 
 using json = nlohmann::json;
 
-void Response(RESPONSE *res, int code, std::string msg) {
+void Response(RESPONSE *res, int code, std::string msg, json data) {
     json body = {
         {"code", code},
-        {"msg", msg}
+        {"msg", msg},
+        {"data", data}
     };
     res->append_output_body(body.dump());
 }
