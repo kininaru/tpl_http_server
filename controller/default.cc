@@ -10,9 +10,21 @@
 
 using json = nlohmann::json;
 
+void response(RESPONSE *res, int code, std::string msg) {
+    json body = { {"code", code}, {"msg", msg} };
+    res->append_output_body(body.dump());
+}
+
+// response deletes *data
 void response(RESPONSE *res, int code, std::string msg, json *data) {
     json body = { {"code", code}, {"msg", msg} };
     if (data) body["data"] = *data;
+    res->append_output_body(body.dump());
+    if (data) delete data;
+}
+
+void response(RESPONSE *res, int code, std::string msg, json data) {
+    json body = { {"code", code}, {"msg", msg}, {"data", data} };
     res->append_output_body(body.dump());
 }
 
